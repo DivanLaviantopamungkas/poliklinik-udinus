@@ -15,28 +15,61 @@
             <div class="card-body">
                 <form action="{{ route('pasien.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required>
+
+                    <!-- Input Nama Pasien -->
+                    <div class="mb-4">
+                        <label for="nama" class="form-label">Nama Pasien</label>
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama"
+                            name="nama" placeholder="Masukkan Nama Pasien" required>
+                        @error('nama')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" required>
+
+                    <!-- Input Alamat -->
+                    <div class="mb-4">
+                        <label for="alamat" class="form-label">Alamat</label>
+                        <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                            name="alamat" placeholder="Masukkan Alamat Pasien" required>
+                        @error('alamat')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="no_kt">No KTP</label>
-                        <input type="text" class="form-control" id="no_ktp" name="no_ktp" required>
+
+                    <!-- Input No KTP -->
+                    <div class="mb-4">
+                        <label for="no_ktp" class="form-label">No KTP</label>
+                        <input type="text" class="form-control @error('no_ktp') is-invalid @enderror" id="no_ktp"
+                            name="no_ktp" placeholder="Masukkan No KTP" required>
+                        @error('no_ktp')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="no_hp">Telepon</label>
-                        <input type="text" class="form-control" id="no_hp" name="no_hp">
+
+                    <!-- Input No Telepon -->
+                    <div class="mb-4">
+                        <label for="no_hp" class="form-label">No Telepon</label>
+                        <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
+                            name="no_hp" placeholder="Masukkan No Telepon" required>
+                        @error('no_hp')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="no_rw">No Rw</label>
-                        <input type="text" class="form-control" id="no_rw" name="no_rw" required>
+
+                    <!-- Input No RW -->
+                    <div class="mb-4">
+                        <label for="no_rw" class="form-label">No RW</label>
+                        <input type="text" class="form-control @error('no_rw') is-invalid @enderror" id="no_rw"
+                            name="no_rw" placeholder="Masukkan No RW" required>
+                        @error('no_rw')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan Pasien</button>
-                    <a href="{{ route('data.pasien') }}" class="btn btn-secondary">Kembali</a>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary btn-lg shadow-sm">Simpan</button>
+                        <a href="{{ route('data.pasien') }}" class="btn btn-secondary btn-lg shadow-sm">Kembali</a>
+                    </div>
                 </form>
             </div>
         </div>

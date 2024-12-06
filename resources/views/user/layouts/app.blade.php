@@ -12,8 +12,10 @@
         rel="stylesheet">
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body id="page-top">
@@ -22,7 +24,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('admin.includes.sidebar')
+        @include('user.includes.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -32,7 +34,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('admin.includes.navbar')
+                @include('user.includes.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -45,7 +47,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @include('admin.includes.footer')
+            @include('user.includes.footer')
             <!-- End of Footer -->
 
         </div>
@@ -80,5 +82,6 @@
         });
     </script>
 @endif
+
 
 </html>

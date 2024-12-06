@@ -22,7 +22,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('admin.includes.sidebar')
+        @include('dokter.includes.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -32,7 +32,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('admin.includes.navbar')
+                @include('dokter.includes.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -45,7 +45,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @include('admin.includes.footer')
+            @include('dokter.includes.footer')
             <!-- End of Footer -->
 
         </div>

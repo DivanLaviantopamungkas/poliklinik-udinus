@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('auth.login');
+        return view('auth.register');
     }
 
     /**
@@ -29,40 +29,22 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
+            'name' => 'required|max:225',
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
 
-        // Cek kredensial
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $user = Auth::user();
-
-            session()->flash('success', 'Login berhasil! Selamat datang kembali, ' . $user->name);
-
-            // Redirect berdasarkan role
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            } elseif ($user->role === 'dokter') {
-                return redirect()->route('dokter.dashboard');
-            } elseif ($user->role === 'pasien') {
-                return redirect()->route('pasien.dashboard');
-            } else {
-                Auth::logout();
-                return redirect()->route('login')->with('error', 'Role tidak valid.');
-            }
-        }
-
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => 'pasien'
         ]);
-    }
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('login');
+        auth()->login($user);
+
+        return redirect()->route('pasien.dashboard')->with('success', 'Registrasi Berhasil');
     }
 
     /**

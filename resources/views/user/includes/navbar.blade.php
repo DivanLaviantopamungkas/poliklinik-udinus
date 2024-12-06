@@ -6,7 +6,7 @@
     </button>
 
     <!-- Page Title -->
-    <h5 class="m-0 font-weight-bold text-primary">{{ getPageTitle() }} </h5>
+    <h5 class="m-0 font-weight-bold text-primary">Dashboard Poliklik </h5>
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">

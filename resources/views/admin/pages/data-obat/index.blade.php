@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Data Pasien')
+@section('title', 'Data Obat')
 
 @section('content')
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Data Pasien</h1>
+        <h1 class="h3 mb-4 text-gray-800">Data Obat</h1>
 
         <!-- Flash Message -->
         @if (session('success'))
@@ -18,12 +18,12 @@
             </div>
         @endif
 
-        <!-- Tabel Data Pasien -->
+        <!-- Tabel Data Obat -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h6 class="m-0 font-weight-bold text-primary">Daftar Pasien</h6>
-                <a href="{{ route('pasien.create') }}" class="btn btn-success btn-sm">Tambah Pasien <i
-                        class="fas fa-user-plus"></i></a>
+                <h6 class="m-0 font-weight-bold text-primary">Daftar Obat</h6>
+                <a href="{{ route('obat.create') }}" class="btn btn-success btn-sm">Tambah Obat <i
+                        class="fas fa-plus"></i></a>
             </div>
 
             <div class="card-body">
@@ -32,37 +32,33 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>No KTP</th>
-                                <th>Telepon</th>
-                                <th>No RW</th>
-                                <th>Aksi</th> <!-- Tambahkan kolom aksi -->
+                                <th>Nama Obat</th>
+                                <th>Kemasan</th>
+                                <th>Harga</th>
+                                <th>Aksi</th> <!-- Kolom untuk aksi CRUD -->
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($dataPasien as $pasien)
+                            @forelse($dataObat as $obat)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $pasien->nama }}</td>
-                                    <td>{{ $pasien->alamat }}</td>
-                                    <td>{{ $pasien->no_ktp }}</td>
-                                    <td>{{ $pasien->no_hp }}</td>
-                                    <td>{{ $pasien->no_rw }}</td>
+                                    <td>{{ $obat->nama_obat }}</td>
+                                    <td>{{ $obat->kemasan }}</td>
+                                    <td>{{ $obat->harga }}</td>
                                     <td>
                                         <!-- Tombol Edit dengan icon -->
-                                        <a href="{{ route('pasien.edit', $pasien->id) }}" class="btn btn-warning btn-sm">
+                                        <a href="{{ route('obat.edit', $obat->id) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>
 
                                         <!-- Tombol Delete dengan modal konfirmasi -->
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#deleteModal{{ $pasien->id }}">
-                                            <i class="fas fa-trash-alt"></i> Delete
+                                            data-target="#deleteModal{{ $obat->id }}">
+                                            <i class="fas fa-trash-alt"></i> Hapus
                                         </button>
 
                                         <!-- Modal Konfirmasi Delete -->
-                                        <div class="modal fade" id="deleteModal{{ $pasien->id }}" tabindex="-1"
+                                        <div class="modal fade" id="deleteModal{{ $obat->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -74,13 +70,12 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Apakah Anda yakin ingin menghapus pasien ini?
+                                                        Apakah Anda yakin ingin menghapus obat ini?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Batal</button>
-                                                        <form action="{{ route('pasien.destroy', $pasien->id) }}"
-                                                            method="POST">
+                                                        <form action="{{ route('obat.delete', $obat->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger">Hapus</button>
@@ -93,7 +88,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Tidak ada data pasien.</td>
+                                    <td colspan="5" class="text-center">Tidak ada data obat.</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -30,7 +30,7 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate = ([
+        $request->validate([
             'nama' => 'required|unique',
             'alamat' => 'required',
             'no_ktp' => 'required|unique',
@@ -73,7 +73,7 @@ class PasienController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->valdate = ([
+        $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
             'no_ktp' => 'required',

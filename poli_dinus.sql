@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 02:18 AM
+-- Generation Time: Dec 06, 2024 at 11:32 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.3.10
 
@@ -90,6 +90,13 @@ CREATE TABLE `dokter` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`id`, `nama`, `alamat`, `no_hp`, `id_poli`, `created_at`, `updated_at`) VALUES
+(1, 'Muhammad Rafif', 'semarang', '0815555555', 1, '2024-12-05 02:36:23', '2024-12-05 02:36:23');
 
 -- --------------------------------------------------------
 
@@ -230,6 +237,13 @@ CREATE TABLE `obat` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `obat`
+--
+
+INSERT INTO `obat` (`id`, `nama_obat`, `kemasan`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 'Paramex', 'sacshet', 4000, '2024-12-05 03:05:42', '2024-12-05 03:16:53');
+
 -- --------------------------------------------------------
 
 --
@@ -294,6 +308,13 @@ CREATE TABLE `poli` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `poli`
+--
+
+INSERT INTO `poli` (`id`, `nama_poli`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 'Poliklinik Udinus 2024', 'Ini adalah poliklinik dari mahasiswa udinus', '2024-12-05 01:59:56', '2024-12-05 02:19:32');
+
 -- --------------------------------------------------------
 
 --
@@ -355,7 +376,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('HXLqbJo9E79ImXK3ijDTijwWE4BlncBlmCEpv1lr', 12, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWHhJVDc1TGJwZEFlblNzVGs0em55Q3VxNXJ3T2xDUndib2RhWGZhMiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQwOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZGF0YS1wYXNpZW4vMi9lZGl0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTI7fQ==', 1733070418);
+('tjdGs7zPyM3GQYUHNRdRW4FSjTQuIBSdCycE4vhi', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV3hrS05ETTRCUDZGY1BoVnlya3Rja0VGUm1uRnd5QTd3Q2xqNmttciI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1733481002);
 
 -- --------------------------------------------------------
 
@@ -367,7 +388,7 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `role` enum('admin','doctor','patient') NOT NULL DEFAULT 'patient',
+  `role` enum('admin','pasien','dokter') NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -380,7 +401,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(12, 'Admin', 'admin@example.com', 'admin', NULL, '$2y$12$/TPDMD36pOeY2TX/UYlElOQPkd.ywJIvNkoC0rMhoQBDE87I7usTS', NULL, '2024-12-01 08:31:58', '2024-12-01 08:31:58');
+(12, 'Admin', 'admin@example.com', 'admin', NULL, '$2y$12$/TPDMD36pOeY2TX/UYlElOQPkd.ywJIvNkoC0rMhoQBDE87I7usTS', NULL, '2024-12-01 08:31:58', '2024-12-01 08:31:58'),
+(14, 'Pasien', 'pasien@example.com', 'pasien', NULL, '$2y$12$uKEP1cbxRhlc6omhCnfGVOtCd6.mkB/POQxPFlZhedekPH9PaokfO', NULL, '2024-12-06 02:12:53', '2024-12-06 02:12:53'),
+(17, 'Dokter', 'dokter@example.com', 'dokter', NULL, '$2y$12$MC6R2rzRzpyzuQI9XkvteegvAtaFygHxSsy78L7nL5colabNpPhSm', NULL, '2024-12-06 02:27:37', '2024-12-06 02:27:37'),
+(19, 'yoga pratama', 'yogapratama@gmail.com', 'pasien', NULL, '$2y$12$xH2G73BOO/7ax2oJIqYZR.gN0QTCG3.Fr.f3CQodgF/Rd2/Hfa0d6', NULL, '2024-12-06 02:41:18', '2024-12-06 02:41:18');
 
 --
 -- Indexes for dumped tables
@@ -555,7 +579,7 @@ ALTER TABLE `detail_periksa`
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -585,7 +609,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -603,7 +627,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `poli`
 --
 ALTER TABLE `poli`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `priksa`
@@ -621,7 +645,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
