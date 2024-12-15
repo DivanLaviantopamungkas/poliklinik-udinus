@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Dokter;
+use App\Models\Pasien;
+use App\Models\Poli;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,7 +21,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.home.index');
+        $dataPasien = Pasien::count();
+        $dataDokter = Dokter::count();
+        $dataPoli = Poli::count();
+        $pasienTerbaru = Pasien::latest()->take(3)->get();
+        return view('admin.pages.home.index', compact('dataPasien', 'dataDokter', 'dataPoli', 'pasienTerbaru'));
     }
 
     /**

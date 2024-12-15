@@ -31,9 +31,9 @@ class PasienController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|unique',
+            'nama' => 'required',
             'alamat' => 'required',
-            'no_ktp' => 'required|unique',
+            'no_ktp' => 'required',
             'no_hp' => 'required',
             'no_rw' => 'required',
         ]);

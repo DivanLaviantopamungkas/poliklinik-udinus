@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -19,17 +16,31 @@
     <!-- SweetAlert CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-    <!-- SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #007bff, #28a745);
+            /* Sesuaikan dengan warna utama Anda */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .btn-user {
             font-weight: 600;
+            border-radius: 25px;
+            background-color: #007bff;
+            /* Sesuaikan dengan warna utama tombol */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-user:hover {
+            background-color: #0056b3;
+            /* Hover effect yang lebih gelap */
         }
 
         h1 {
@@ -44,18 +55,48 @@
 
         .form-control-user {
             border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .form-group label {
+            font-weight: 500;
         }
 
         .btn {
             border-radius: 20px;
         }
+
+        @media (max-width: 768px) {
+            .col-lg-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .card {
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
 
-<body class="bg-gradient-primary">
+<body>
 
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -66,8 +107,8 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-flex align-items-center justify-content-center">
-                                <img src="{{ asset('assets/img/logoudinus.png') }}" alt="UDINUS Logo"
-                                    style="width: 300px;">
+                                <a href="{{ route('home') }}"><img src="{{ asset('assets_home/img/logo.png') }}"
+                                        alt="UDINUS Logo" style="width: 300px;"></a>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
@@ -95,7 +136,7 @@
                                                 class="form-control form-control-user"
                                                 placeholder="Masukkan kata sandi Anda" required>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-user btn-block">
                                             Masuk
                                         </button>
                                     </form>
@@ -115,8 +156,6 @@
             </div>
 
         </div>
-
-    </div>
 
     </div>
 

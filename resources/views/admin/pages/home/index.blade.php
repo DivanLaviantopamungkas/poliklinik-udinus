@@ -15,15 +15,17 @@
         <div class="row">
             <!-- Total Pasien Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow border-start-primary">
+                <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <i class="fas fa-users fa-3x text-primary"></i>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Total Pasien
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataPasien }}</div>
                             </div>
-                            <div>
-                                <h5 class="card-title text-uppercase text-muted mb-1">Total Pasien</h5>
-                                <h2 class="text-primary fw-bold">111</h2>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -32,15 +34,36 @@
 
             <!-- Total Dokter Card -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card shadow border-start-success">
+                <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="me-3">
-                                <i class="fas fa-user-md fa-3x text-success"></i>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Total Dokter
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataDokter }}</div>
                             </div>
-                            <div>
-                                <h5 class="card-title text-uppercase text-muted mb-1">Total Dokter</h5>
-                                <h2 class="text-success fw-bold">11</h2>
+                            <div class="col-auto">
+                                <i class="fas fa-user-md fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Poliklinik Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Total Poliklinik
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataPoli }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-hospital fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
@@ -70,18 +93,12 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Ali Mahmud
-                                <span class="badge bg-primary rounded-pill">Jakarta</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Siti Aminah
-                                <span class="badge bg-success rounded-pill">Bandung</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Ahmad Yasin
-                                <span class="badge bg-info rounded-pill">Surabaya</span>
-                            </li>
+                            @foreach ($pasienTerbaru as $pasien)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ $pasien->nama }}
+                                    <span class="badge bg-light rounded-pill">{{ $pasien->alamat }}</span>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

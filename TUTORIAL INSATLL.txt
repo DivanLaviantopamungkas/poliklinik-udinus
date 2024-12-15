@@ -1,0 +1,7 @@
+1. clone dari github
+2. instal composer
+3. generate key baru
+4. jalankan server
+5. AKUN ADMIN : admin@example.com PW : 12345678
+AKUN DOKTER : dokter@example.com PW : 12345678
+AKUN PASIEN : yogapratama@gmail.com PW : sukunisi16

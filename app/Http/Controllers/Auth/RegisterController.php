@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -33,6 +34,11 @@ class RegisterController extends Controller
             'name' => 'required|max:225',
             'email' => 'required|email',
             'password' => 'required|min:8',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_ktp' => 'required',
+            'no_hp' => 'required',
+            'no_rw' => 'required',
         ]);
 
         $user = User::create([
@@ -40,6 +46,14 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'role' => 'pasien'
+        ]);
+
+        Pasien::create([
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'no_ktp' => $request->no_ktp,
+            'no_hp' => $request->no_hp,
+            'no_rw' => $request->no_rw
         ]);
 
         auth()->login($user);

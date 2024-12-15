@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingPage;
 use App\Http\Controllers\Admin\DaftarpoliController;
 use App\Http\Controllers\Admin\DokterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -12,9 +13,7 @@ use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Dokter\HomeDokterController;
 use App\Http\Controllers\User\HomeUserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingPage::class, 'index'])->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
