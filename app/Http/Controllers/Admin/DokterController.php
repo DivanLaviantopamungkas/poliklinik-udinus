@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Dokter;
 use App\Models\Poli;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
@@ -33,18 +36,39 @@ class DokterController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'id_poli' => 'required|exists:poli,id',
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'nama' => 'required',
+                'alamat' => 'required',
+                'no_hp' => 'required',
+                'id_poli' => 'required|exists:poli,id',
+                'email' => 'required|email',
+                'password' => 'required|min:8',
+            ]
+        );
+
+        //validasi jika ada salah validasi 
+        if ($validator->fails()) {
+            return redirect()->route('dokter.create')
+                ->withErrors($validator) // Mengirim error ke view
+                ->withInput(); // Mengembalikan input sebelumnya
+        }
+
+        //Menyimpan Data Menuju user 
+        $user = User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'dokter'
         ]);
 
         Dokter::create([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'no_hp' => $request->no_hp,
-            'id_poli' => $request->id_poli
+            'id_poli' => $request->id_poli,
+            'user_id' => $user->id
         ]);
 
         return redirect()->route('data.dokter')->with('success', 'Data Dokter behasil ditambahkan!');

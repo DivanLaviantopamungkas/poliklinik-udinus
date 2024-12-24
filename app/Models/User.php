@@ -50,4 +50,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
+    // Relasi user ke pasien
+    public function pasien()
+    {
+        return $this->hasOne(Pasien::class, 'user_id');
+    }
+
+    // Model User
+    public function dokter()
+    {
+        return $this->hasOne(Dokter::class, 'user_id', 'id');
+    }
 }

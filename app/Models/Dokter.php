@@ -8,10 +8,20 @@ class Dokter extends Model
 {
     protected $table = 'dokter';
 
-    protected $fillable = ['nama', 'alamat', 'no_hp', 'id_poli'];
+    protected $fillable = ['nama', 'alamat', 'no_hp', 'id_poli',  'user_id'];
 
-    public function poliklinik()
+    public function poli()
     {
         return $this->belongsTo(Poli::class, 'id_poli', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany(JadwalPeriksa::class, 'id_dokter', 'id');
     }
 }

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
+use App\Models\DaftarPeriksa;
+use App\Models\Daftarpoli;
+use App\Models\JadwalPeriksa;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
 
 class HomeDokterController extends Controller
@@ -12,7 +16,14 @@ class HomeDokterController extends Controller
      */
     public function index()
     {
-        return view('dokter.pages.home.index');
+        $pasienPerluDiperiksa = Daftarpoli::where('status_periksa', 0)->count();
+
+        $jadwalAktif = JadwalPeriksa::where('aktif', 1)->count();
+
+        return view('dokter.pages.home.index', [
+            'pasienPerluDiperiksa' => $pasienPerluDiperiksa,
+            'jadwalAktif' => $jadwalAktif,
+        ]);
     }
 
     /**

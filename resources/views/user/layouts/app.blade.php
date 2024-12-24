@@ -61,6 +61,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    @stack('scripts')
     <!-- JavaScript files -->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -69,12 +70,13 @@
     <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+
 </body>
 
 @if (session('success'))
     <script>
         Swal.fire({
-            title: 'Selamat Datang!',
+            title: 'Berhasil',
             text: '{{ session('success') }}',
             icon: 'success',
             timer: 3000,

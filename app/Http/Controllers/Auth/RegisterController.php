@@ -49,11 +49,12 @@ class RegisterController extends Controller
         ]);
 
         Pasien::create([
+            'user_id' => $user->id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'no_ktp' => $request->no_ktp,
             'no_hp' => $request->no_hp,
-            'no_rw' => $request->no_rw
+            'no_rw' => $request->no_rw,
         ]);
 
         auth()->login($user);

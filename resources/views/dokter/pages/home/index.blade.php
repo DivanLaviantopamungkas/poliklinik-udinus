@@ -23,7 +23,7 @@
                             </div>
                             <div>
                                 <h5 class="card-title text-uppercase text-muted mb-1">Pasien Aktif</h5>
-                                <h2 class="text-primary fw-bold">75</h2>
+                                <h2 class="text-primary fw-bold">{{ $pasienPerluDiperiksa }}</h2>
                             </div>
                         </div>
                     </div>
@@ -40,14 +40,14 @@
                             </div>
                             <div>
                                 <h5 class="card-title text-uppercase text-muted mb-1">Jadwal Hari Ini</h5>
-                                <h2 class="text-success fw-bold">5</h2>
+                                <h2 class="text-success fw-bold">{{ $jadwalAktif }}</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Pasien Perlu Atensi -->
+            {{-- <!-- Pasien Perlu Atensi -->
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card shadow border-start-warning">
                     <div class="card-body">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <!-- Content Row -->
@@ -81,101 +81,75 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Today's Schedule -->
-            <div class="col-xl-4 col-lg-5">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Jadwal Hari Ini</h6>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                08:00 - 09:00
-                                <span class="badge bg-primary">Pemeriksaan Umum</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                10:00 - 11:30
-                                <span class="badge bg-success">Kontrol Pasca Operasi</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                13:00 - 14:00
-                                <span class="badge bg-warning">Konsultasi</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Patients Needing Attention -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card shadow">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-danger">Pasien Perlu Atensi</h6>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Kondisi</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ali Mahmud</td>
-                                    <td>Darah Tinggi</td>
-                                    <td><span class="badge bg-danger">Kritis</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Siti Aminah</td>
-                                    <td>Diabetes</td>
-                                    <td><span class="badge bg-warning">Perlu Kontrol</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Ahmad Yasin</td>
-                                    <td>Demam Tinggi</td>
-                                    <td><span class="badge bg-danger">Kritis</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+            {{-- <!-- Patients Needing Attention -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-danger">Pasien Perlu Atensi</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Kondisi</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Ali Mahmud</td>
+                                        <td>Darah Tinggi</td>
+                                        <td><span class="badge bg-danger">Kritis</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Siti Aminah</td>
+                                        <td>Diabetes</td>
+                                        <td><span class="badge bg-warning">Perlu Kontrol</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ahmad Yasin</td>
+                                        <td>Demam Tinggi</td>
+                                        <td><span class="badge bg-danger">Kritis</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+            <!-- Footer -->
+            <footer class="text-center mt-4 small text-muted">
+                © {{ date('Y') }} Dashboard Dokter. Dikembangkan dengan <i class="fas fa-heart text-danger"></i> oleh
+                Tim
+                Anda.
+            </footer>
         </div>
+    @endsection
 
-        <!-- Footer -->
-        <footer class="text-center mt-4 small text-muted">
-            © {{ date('Y') }} Dashboard Dokter. Dikembangkan dengan <i class="fas fa-heart text-danger"></i> oleh Tim
-            Anda.
-        </footer>
-    </div>
-@endsection
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Selamat Datang!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                timer: 3000, // Otomatis menutup setelah 3 detik
-                showConfirmButton: false
-            }).then(() => {
-                // Redirect ke dashboard berdasarkan role
-                @if (Auth::user()->role === 'admin')
-                    window.location.href = '{{ route('admin.dashboard') }}';
-                @elseif (Auth::user()->role === 'dokter')
-                    window.location.href = '{{ route('dokter.dashboard') }}';
-                @elseif (Auth::user()->role === 'pasien')
-                    window.location.href = '{{ route('pasien.dashboard') }}';
-                @endif
-            });
-        </script>
-    @endif
-@endpush
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    title: 'Selamat Datang!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    timer: 3000, // Otomatis menutup setelah 3 detik
+                    showConfirmButton: false
+                }).then(() => {
+                    // Redirect ke dashboard berdasarkan role
+                    @if (Auth::user()->role === 'admin')
+                        window.location.href = '{{ route('admin.dashboard') }}';
+                    @elseif (Auth::user()->role === 'dokter')
+                        window.location.href = '{{ route('dokter.dashboard') }}';
+                    @elseif (Auth::user()->role === 'pasien')
+                        window.location.href = '{{ route('pasien.dashboard') }}';
+                    @endif
+                });
+            </script>
+        @endif
+    @endpush

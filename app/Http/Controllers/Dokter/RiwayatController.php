@@ -1,20 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
-use App\Models\Daftarpoli;
+use App\Models\DetailPeriksa;
+use App\Models\Periksa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class DaftarpoliController extends Controller
+class RiwayatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $daftarPoli = Daftarpoli::All();
-        return view('user.pages.daftar-poli.index', compact('daftarPoli'));
+        $user = Auth::user();
+
+        $riwayat = Periksa::with(['daftarPoli.pasien', 'daftarPoli.dokter']) // Menambahkan eager loading untuk pasien
+            ->whereHas('daftarPoli', function ($query) use ($user) {
+                $query->where('dokter_id', $user->dokter->id);
+            })
+            ->orderBy('tgl_periksa', 'desc')
+            ->get();
+
+        return view('dokter.pages.detail-periksa.index', compact('riwayat'));
     }
 
     /**
@@ -38,7 +48,13 @@ class DaftarpoliController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $riwayat = Periksa::with(['daftarPoli.pasien', 'detailPeriksa.obat'])->find($id);
+
+        if ($riwayat) {
+            return response()->json(['data' => $riwayat]);
+        }
+
+        return response()->json(['message' => 'Detail tidak ditemukan'], 404);
     }
 
     /**

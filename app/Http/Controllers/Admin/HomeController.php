@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\CheckRole;
 use App\Models\Dokter;
 use App\Models\Pasien;
 use App\Models\Poli;
@@ -10,11 +11,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
     // public function __construct()
     // {
-    //     $this->middleware('auth'); // Hanya bisa diakses jika sudah login
-    //     $this->middleware('role:admin')->only('index'); // Hanya admin yang bisa akses
+    //     // Hanya admin yang bisa mengakses controller ini
+    //     $this->middleware('role:admin');
     // }
     /**
      * Display a listing of the resource.

@@ -46,7 +46,7 @@
                                     <td>{{ $dokter->nama }}</td>
                                     <td>{{ $dokter->alamat }}</td>
                                     <td>{{ $dokter->no_hp }}</td>
-                                    <td>{{ $dokter->poliklinik->nama_poli ?? 'Tidak Ada' }}</td>
+                                    <td>{{ $dokter->poli->nama_poli ?? 'Tidak Ada' }}</td>
                                     <td>
                                         <!-- Tombol Edit dengan icon -->
                                         <a href="{{ route('dokter.edit', $dokter->id) }}" class="btn btn-warning btn-sm">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DaftarPoli;
 use App\Http\Controllers\LandingPage;
 use App\Http\Controllers\Admin\DaftarpoliController;
 use App\Http\Controllers\Admin\DokterController;
@@ -12,6 +13,15 @@ use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Dokter\HomeDokterController;
 use App\Http\Controllers\User\HomeUserController;
+use App\Http\Controllers\Admin\ApiController;
+use App\Http\Controllers\Api\DaftarController;
+use App\Http\Controllers\Dokter\InputJadwalController;
+use App\Http\Controllers\Dokter\PemeriksaanController;
+use App\Http\Controllers\Dokter\ProfileDokterController;
+use App\Http\Controllers\Dokter\RiwayatController;
+use App\Http\Controllers\User\PendaftaranPoliController;
+use Symfony\Component\Console\Input\Input;
+use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', [LandingPage::class, 'index'])->name('home');
 
@@ -22,9 +32,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register/store', [RegisterController::class, 'store'])->name('register.store');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['role:admin'])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
-
     //Data - Pasien
     Route::get('/data-pasien', [PasienController::class, 'index'])->name('data.pasien');
     Route::get('/data-pasien/create', [PasienController::class, 'create'])->name('pasien.create');
@@ -59,10 +68,42 @@ Route::middleware(['auth'])->group(function () {
 
     //Daftar Poli
     Route::get('/daftar-poli', [DaftarpoliController::class, 'index'])->name('daftar.poli');
+});
 
+Route::middleware(['role:dokter'])->group(function () {
+    //Dashboard Dokter
+    Route::get('/dashboard/dokter', [HomeDokterController::class, 'index'])->name('dokter.dashboard');
+
+    //Input Jadwal Dokter
+    Route::get('/dokter/input-jadwal', [InputJadwalController::class, 'index'])->name('dokter.jadwal.index');
+    Route::get('/dokter/input-jadwal/create', [InputJadwalController::class, 'create'])->name('jadwal.create');
+    Route::post('/dokter/input-jadwal/store', [InputJadwalController::class, 'store'])->name('jadwal.store');
+    Route::get('/dokter/input-jadwal/{id}/edit', [InputJadwalController::class, 'edit'])->name('jadwal.edit');
+    Route::put('/dokter/input-jadwal/{id}', [InputJadwalController::class, 'update'])->name('jadwal.update');
+    Route::post('/jadwal/{id}/activate', [InputJadwalController::class, 'activate'])->name('jadwal.activate');
+    Route::delete('/dokter/input-jadwal/{id}', [InputJadwalController::class, 'destroy'])->name('jadwal.destroy');
+
+    //Permriksaan
+    Route::get('/dokter/periksa-pasien', [PemeriksaanController::class, 'index'])->name('periksa.index');
+    Route::get('/dokter/periksa-pasien/periksa/{id}', [PemeriksaanController::class, 'create'])->name('periksa.create');
+    Route::post('/dokter/periksa-pasien/periksa/store', [PemeriksaanController::class, 'store'])->name('periksa.store');
+    Route::post('/dokter/periksa-pasien/updateStatus', [PemeriksaanController::class, 'updateStatus'])->name('periksa.updateStatus');
+
+    //Profile Menegement Dokter
+    Route::get('/dokter/profile-dokter/edit', [ProfileDokterController::class, 'index'])->name('profile.dokter.edit');
+    Route::put('/dokter/profile-dokter/{id}', [ProfileDokterController::class, 'update'])->name('profile.dokter.update');
+
+    //Riwayat Pasien 
+    Route::get('/dokter/riwayat', [RiwayatController::class, 'index'])->name('riwayat.index');
+});
+
+Route::middleware(['role:pasien'])->group(function () {
     //Dashboard Pasien
     Route::get('/dashboard/pasien', [HomeUserController::class, 'index'])->name('pasien.dashboard');
 
-    //Dashboard Dokter
-    Route::get('/dashboard/dokter', [HomeDokterController::class, 'index'])->name('dokter.dashboard');
+    //Janji Temu
+    Route::get('/pendaftaran-poli', [PendaftaranPoliController::class, 'index'])->name('pendaftaran.poli');
+    Route::post('/pendaftaran-poli', [PendaftaranPoliController::class, 'getDokter'])->name('pendaftaran.poli.getDokter');
+    Route::post('/pendaftaran-poli/store', [PendaftaranPoliController::class, 'store'])->name('pendaftaran.poli.store');
+    Route::get('/pendaftaran-poli/selesai/{id}', [PendaftaranPoliController::class, 'selesai'])->name('pendaftaran.poli.selesai');
 });
