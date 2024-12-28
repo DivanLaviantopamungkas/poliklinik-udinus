@@ -20,6 +20,7 @@ use App\Http\Controllers\Dokter\PemeriksaanController;
 use App\Http\Controllers\Dokter\ProfileDokterController;
 use App\Http\Controllers\Dokter\RiwayatController;
 use App\Http\Controllers\User\PendaftaranPoliController;
+use App\Http\Controllers\User\RiwayatPasienController;
 use Symfony\Component\Console\Input\Input;
 use App\Http\Middleware\RoleMiddleware;
 
@@ -106,4 +107,6 @@ Route::middleware(['role:pasien'])->group(function () {
     Route::post('/pendaftaran-poli', [PendaftaranPoliController::class, 'getDokter'])->name('pendaftaran.poli.getDokter');
     Route::post('/pendaftaran-poli/store', [PendaftaranPoliController::class, 'store'])->name('pendaftaran.poli.store');
     Route::get('/pendaftaran-poli/selesai/{id}', [PendaftaranPoliController::class, 'selesai'])->name('pendaftaran.poli.selesai');
+
+    Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])->name('riwayatpasien.index');
 });

@@ -27,6 +27,14 @@
             <span class="ml-2">Buat Janji</span>
         </a>
     </li>
+
+    <!-- Menu Riwayat -->
+    <li class="nav-item {{ request()->routeIs('riwayatpasien.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('riwayatpasien.index') }}">
+            <i class="fas fa-fw fa-history"></i>
+            <span>Riwayat Pemeriksaan</span>
+        </a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 
